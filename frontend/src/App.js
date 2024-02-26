@@ -1,27 +1,28 @@
-
-import './App.css';
 import React, { useState } from 'react';
-import Quiz from './components/Quiz';
 import IntroScreen from './components/IntroScreen';
+import Quiz from './components/Quiz';
 
-const App = () => {
+function App() {
   const [quizStarted, setQuizStarted] = useState(false);
-  const [userInfo, setUserInfo] = useState({});
+  const [user, setUser] = useState({
+    fullName: '',
+    email: '',
+  });
 
-  const startQuiz = (userData) => {
-    setUserInfo(userData);
+  const onStartQuiz = (userInfo) => {
+    setUser(userInfo);
     setQuizStarted(true);
   };
 
   return (
-    <div className="app">
+    <div className="App">
       {!quizStarted ? (
-        <IntroScreen onStartQuiz={startQuiz} />
+        <IntroScreen onStartQuiz={onStartQuiz} />
       ) : (
-        <Quiz userInfo={userInfo} />
+        <Quiz fullName={user.fullName} email={user.email} />
       )}
     </div>
   );
-};
+}
 
 export default App;

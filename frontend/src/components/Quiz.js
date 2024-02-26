@@ -61,7 +61,7 @@ const questionsData = [
   }
 ];
 
-const Quiz = () => {
+const Quiz = (props) => {
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [answers, setAnswers] = useState({});
     const [submitted, setSubmitted] = useState(false);
@@ -90,13 +90,16 @@ const Quiz = () => {
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ answers }),
+            body: JSON.stringify({
+              answers,
+              user: { fullName: props.fullName, email: props.email },
+            }),
           });
       
           const result = await response.json();
           if (response.ok) {
             setSubmitted(true);
-            setProfileResult(result); // Aqui você atualiza o estado com o resultado do perfil
+            setProfileResult(result);
           } else {
             throw new Error(result.message);
           }
