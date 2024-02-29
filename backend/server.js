@@ -9,8 +9,13 @@ app.use(cors());
 app.use(express.json());
 
 app.post('/api/calculate-profile', (req, res) => {
+  const { answers, user } = req.body;
+  const { fullName, email } = user;
+  
+  console.log("//////////////////// TESTE ///////////////////")
+  console.log(`Nome = ${fullName}, Email= ${email}`);
+  console.log(req.body)
   // Assume que o corpo da requisição inclui nome, e-mail e respostas
-  const { name, email, answers } = req.body; // Agora inclui o nome do usuário
 
   // Calcula a pontuação total somando os valores das respostas
   const totalScore = Object.values(answers).reduce((total, answer) => total + answer, 0);
@@ -30,14 +35,14 @@ app.post('/api/calculate-profile', (req, res) => {
     profile = 'Indeterminado';
   }
   
-  const resultText = `Seu perfil é: ${profile}. Pontuação total: ${totalScore}.`;
+  const resultText = `Seu perfil ${fullName}, é: ${profile}. Pontuação total: ${totalScore}.`;
   res.json({ totalScore, profile });
 
   // Enviar e-mail para o usuário
   sendEmail(email, 'Seu Resultado do Questionário', resultText);
 
   // Enviar e-mail para o administrador com detalhes adicionais
-  const adminEmailContent = `Um novo usuário completou o questionário. \nNome: ${name}\nE-mail: ${email}\nResultado: ${resultText}`;
+  const adminEmailContent = `Um novo usuário completou o questionário. \nNome: ${fullName}\nE-mail: ${email}\nResultado: ${resultText}`;
   sendEmail('dute.test@gmail.com', 'Novo Resultado de Questionário', adminEmailContent);
 });
 

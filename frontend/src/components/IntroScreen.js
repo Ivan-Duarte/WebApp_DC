@@ -17,6 +17,7 @@ const IntroScreen = ({ onStartQuiz }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (termsAccepted && isFormValid) {
+      console.log(` Nome = ${fullName}, Email = ${email} `)
       onStartQuiz({ fullName, email });
     }
   };
