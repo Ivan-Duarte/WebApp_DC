@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import IntroScreen from './components/IntroScreen';
 import Quiz from './components/Quiz';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function App() {
   const [quizStarted, setQuizStarted] = useState(false);
