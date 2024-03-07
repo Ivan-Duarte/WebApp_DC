@@ -1,4 +1,5 @@
 import React from 'react';
+import './Summary.css'; 
 
 const Summary = ({ answers, questions, profileResult }) => {
     console.log(profileResult);
@@ -15,9 +16,9 @@ const Summary = ({ answers, questions, profileResult }) => {
         </ul>
         {profileResult && (
             <>
-            <h3>Seu Perfil de Dominância Cerebral:</h3>
-            <p>{profileResult.profile}</p>
-            <p>Pontuação total: {profileResult.totalScore}</p>
+            <h3 className='resultado'>Seu Perfil de Dominância Cerebral:</h3>
+            <p className='profile'>{profileResult.profile}</p>
+            <p className='points'>Pontuação total: {profileResult.totalScore}</p>
             </>
         )}
         </div>
