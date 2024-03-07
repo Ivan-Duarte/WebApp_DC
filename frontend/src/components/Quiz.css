@@ -1,0 +1,66 @@
+/* Quiz.css */
+
+.quiz-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.question-section {
+    flex-grow: 29;
+    text-align: center;
+}
+
+.nav-button {
+    font-size: x-large;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    padding: 250px 50px;
+    margin: 5rem;
+    cursor: pointer;
+}
+
+.nav-button:hover{
+    background-color: #47a0ff;
+    color: white;
+}
+
+.nav-button:disabled {
+    background-color: #cccccc; /* Cinza claro */
+    color: #666666; /* Cor do texto mais escura para melhor contraste */
+    cursor: not-allowed; /* O cursor que indica que o botão está desabilitado */
+}
+
+.nav-button.left {
+    align-self: center;
+    max-width: 250px;
+}
+
+.nav-button.right {
+    align-self: center;
+    max-width: 250px;
+}
+
+.submit-button {
+    background-color: green;
+    color: white;
+    padding: 250px 50px;
+    border: none;
+    cursor: pointer;
+    align-self: center;
+    max-width: 250px;
+    margin: 5rem;
+}
+.submit-button:hover {
+    background-color: rgb(76, 200, 76);
+    color: white;
+}
+
+/* Estilos para responsividade */
+@media screen and (max-width: 768px) {
+    .nav-button {
+        padding: 8px 16px;
+    }
+}

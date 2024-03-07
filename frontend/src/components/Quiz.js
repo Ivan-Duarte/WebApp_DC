@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Question from './Question';
 import Summary from './Summary';
+import './Quiz.css';
 
 const questionsData = [
   {
@@ -107,36 +108,42 @@ const Quiz = (props) => {
           console.error('Erro ao enviar respostas:', error);
         }
       };
-  
       return (
         <div className="quiz">
-            {!submitted ? (
-                <>
-                    {questionsData.map((question, index) => (
-                        currentQuestion === index && (
-                            <Question
-                                key={index}
-                                questionText={question.questionText}
-                                options={question.options}
-                                onOptionSelect={onOptionSelect}
-                                questionId={index}
-                                answers={answers} // Esta linha permanece inalterada
-                            />
-                        )
-                    ))}
-                    {currentQuestion > 0 && (
-                        <button onClick={goToPrevious}>Anterior</button>
-                    )}
-                    {currentQuestion < questionsData.length - 1 ? (
-                        <button onClick={goToNext}>Próxima</button>
-                    ) : (
-                        <button onClick={handleSubmit}>Enviar Respostas</button>
-                    )}
-                </>
-            ) : (
-                // Aqui é onde você precisa passar 'profileResult' junto com 'answers' e 'questionsData'
-                <Summary answers={answers} questions={questionsData} profileResult={profileResult} />
-            )}
+            <div className="quiz-container">
+                {!submitted ? (
+                    <>
+                        <button 
+                            className="nav-button left" 
+                            onClick={goToPrevious} 
+                            disabled={currentQuestion === 0} // Desabilita se for a primeira pergunta
+                        >
+                            Anterior
+                        </button>
+                        <div className="question-section">
+                            {questionsData.map((question, index) => (
+                                currentQuestion === index && (
+                                    <Question
+                                        key={index}
+                                        questionText={question.questionText}
+                                        options={question.options}
+                                        onOptionSelect={onOptionSelect}
+                                        questionId={index}
+                                        answers={answers}
+                                    />
+                                )
+                            ))}
+                        </div>
+                        {currentQuestion < questionsData.length - 1 ? (
+                            <button className="nav-button right" onClick={goToNext}>Próxima</button>
+                        ) : (
+                            <button className="submit-button" onClick={handleSubmit}>Enviar Respostas</button>
+                        )}
+                    </>
+                ) : (
+                    <Summary answers={answers} questions={questionsData} profileResult={profileResult} />
+                )}
+            </div>
         </div>
     );
 };
